@@ -1,13 +1,14 @@
 package com.example.boardapi.board.entity;
 
 import com.example.boardapi.user.entity.User;
+import com.example.boardapi.util.Timestamped;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-public class Board {
+public class Board extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
