@@ -14,6 +14,8 @@
       <input id="nickname" type="text" v-model="nickname"/>
     </div>
     <button type="submit">Login</button>
+    <p>{{logMessage}}</p>
+
   </form>
 </template>
 
@@ -26,13 +28,27 @@ export default {
       username: '',
       password: '',
       nickname: '',
+      logMessage: '',
     }
   },
   methods: {
-    submitForm() {
-      alert('성공!')
-      console.log('Form submit')
-      registerUser();
+    async submitForm() {
+      const userData = {
+        username: this.username,
+        password: this.password,
+        nickname: this.nickname,
+      };
+      // const response = await registerUser(userData);
+      const {data} = await registerUser(userData);
+      this.logMessage = `${data.username} 님이 가입되었습니다.`;
+      console.log(data) // 바로 response 의 data 를 꺼낼 수 있음
+      // console.log(response)
+      this.initForm();
+    },
+    initForm() {
+      this.username = '';
+      this.password = '';
+      this.nickname = '';
     },
   }
 };
