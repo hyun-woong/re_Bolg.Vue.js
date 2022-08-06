@@ -128,10 +128,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // User API 허용
         skipPathList.add("POST,/api/signup");
-        skipPathList.add("GET,/**.js");
-        skipPathList.add("GET,/favicon.ico");
-        skipPathList.add("GET,/login.html");
-        skipPathList.add("POST,/login.html");
 
         FilterSkipMatcher matcher = new FilterSkipMatcher(
                 skipPathList,
