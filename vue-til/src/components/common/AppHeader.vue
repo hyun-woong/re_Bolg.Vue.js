@@ -57,7 +57,7 @@
                 <router-link to="/signup" class="button is-primary">
                   <strong>Sign up</strong>
                 </router-link>
-              <router-link to="/login" class="button is-light">
+              <router-link to="/login" class="button is-light" id="login-btn">
                 Log in
               </router-link>
             </div>
@@ -74,4 +74,7 @@ export default {};
 
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+#login-btn {
+  font-weight: bold;
+}
 </style>
