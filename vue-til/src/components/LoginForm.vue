@@ -38,19 +38,6 @@
       </div>
     </form>
   </div>
-
-<!--  <form @submit.prevent="submitForm">-->
-<!--    <div>-->
-<!--      <label for="userId">ID : </label>-->
-<!--      <input id="userId" type="text" v-model="userId" />-->
-
-<!--      <label for="password">Password : </label>-->
-<!--      <input id="password" type="text" v-model="password" />-->
-<!--    </div>-->
-<!--    <button :disabled="!isUserEmailValid || !password" type="submit">-->
-<!--      Login-->
-<!--    </button>-->
-  <!--  </form>-->
 </template>
 
 <script>
