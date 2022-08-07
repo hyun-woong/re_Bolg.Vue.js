@@ -4,7 +4,7 @@
       <div class="field">
         <label class="label" for="email">Email</label>
         <div class="control">
-          <input v-model="email" id="email" class="input" type="email" placeholder="e.g. alex@example.com">
+          <input v-model="email" id="email" class="input" type="email" placeholder="alex@example.com">
         </div>
       </div>
 

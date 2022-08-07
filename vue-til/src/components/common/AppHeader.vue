@@ -3,7 +3,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
         </router-link>
 
 
@@ -16,17 +16,17 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
 
-<!--        상단 네비게이션 바-->
+        <!--        상단 네비게이션 바-->
         <div class="navbar-start">
           <router-link to="/" class="navbar-item">
-              Home
+            Home
           </router-link>
 
           <router-link to="/board" class="navbar-item">
-              Board
+            Board
           </router-link>
 
-<!--          카테고리-->
+          <!--          카테고리-->
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
               More
@@ -50,13 +50,13 @@
           </div>
         </div>
 
-<!--        회원가입, 로그인-->
+        <!--        회원가입, 로그인-->
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-                <router-link to="/signup" class="button is-primary">
-                  <strong>Sign up</strong>
-                </router-link>
+              <router-link to="/signup" class="button is-primary">
+                <strong>Sign up</strong>
+              </router-link>
               <router-link to="/login" class="button is-light" id="login-btn">
                 Log in
               </router-link>
@@ -74,6 +74,7 @@ export default {};
 
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
 #login-btn {
   font-weight: bold;
 }
