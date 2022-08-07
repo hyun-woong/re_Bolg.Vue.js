@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {registerUser} from "@/api/index";
+import {registerUser} from "@/api/index.js";
 
 export default {
   data() {

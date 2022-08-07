@@ -71,7 +71,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(formLoginFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        http.formLogin().disable()
+        http
+                .formLogin()
+                .disable()
                 .authorizeRequests()
 //                .antMatchers("/websocket/**").permitAll()
                 .anyRequest()
@@ -105,7 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public Filter formLoginFilter() throws Exception {
         FormLoginFilter formLoginFilter = new FormLoginFilter(authenticationManager());
-        formLoginFilter.setFilterProcessesUrl("/user/login");
+//        formLoginFilter.setFilterProcessesUrl("/api/login");
         formLoginFilter.afterPropertiesSet();
         return formLoginFilter;
     }
@@ -118,9 +120,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private Filter jwtFilter() throws Exception {
         List<String> skipPathList = new ArrayList<>();
 
-        // Static 정보 접근 허용
-        skipPathList.add("GET,/images/**");
-        skipPathList.add("GET,/css/**");
+//        // Static 정보 접근 허용
+//        skipPathList.add("GET,/images/**");
+//        skipPathList.add("GET,/css/**");
 
         // h2-console 허용
         skipPathList.add("GET,/h2-console/**");
@@ -128,6 +130,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // User API 허용
         skipPathList.add("POST,/api/signup");
+        skipPathList.add("POST,/api/login");
 
         FilterSkipMatcher matcher = new FilterSkipMatcher(
                 skipPathList,

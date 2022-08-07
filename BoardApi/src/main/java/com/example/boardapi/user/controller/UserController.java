@@ -1,9 +1,11 @@
 package com.example.boardapi.user.controller;
 
+import com.example.boardapi.user.dto.LoginDto;
 import com.example.boardapi.user.dto.SignupDto;
 import com.example.boardapi.user.entity.User;
 import com.example.boardapi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,11 @@ public class UserController {
     private ResponseEntity<User> signup(
             @RequestBody SignupDto signupDto
     ) {
-       return userService.signup(signupDto);
+        return userService.signup(signupDto);
+    }
+
+    @PostMapping("/login")
+    private HttpHeaders login(@RequestBody LoginDto loginDto) {
+        return userService.login(loginDto);
     }
 }
