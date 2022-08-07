@@ -53,10 +53,11 @@ export default {
         alert(`${data.nickname} 님이 가입되었습니다.`);
         // this.logMessage = `${data.nickname} 님이 가입되었습니다.`;
         // console.log(response)
-        this.initForm();
       } catch (e) {
         console.log(e.response);
         alert(e.response.data.description);
+      } finally {
+        this.initForm();
       }
     },
     initForm() {

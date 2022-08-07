@@ -31,10 +31,11 @@ export default {
         const response = await loginUser(userData);
         alert(`${userData.userId} 님 로그인 되었습니다.`);
         console.log(response);
-        this.initForm();
       } catch (e) {
         console.log(e.response);
         alert(e.response.data.description);
+      } finally {
+        this.initForm();
       }
     },
     initForm() {
