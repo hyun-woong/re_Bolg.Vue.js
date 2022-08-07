@@ -3,11 +3,20 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          <img
+            src="https://bulma.io/images/bulma-logo.png"
+            width="112"
+            height="28"
+          />
         </router-link>
 
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -15,7 +24,6 @@
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu">
-
         <!--        상단 네비게이션 바-->
         <div class="navbar-start">
           <router-link to="/" class="navbar-item">
@@ -42,7 +50,7 @@
               <a class="navbar-item">
                 Contact
               </a>
-              <hr class="navbar-divider">
+              <hr class="navbar-divider" />
               <a class="navbar-item">
                 Report an issue
               </a>
@@ -52,16 +60,22 @@
 
         <!--        회원가입, 로그인-->
         <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <router-link to="/signup" class="button is-primary">
-                <strong>Sign up</strong>
-              </router-link>
-              <router-link to="/login" class="button is-light" id="login-btn">
-                Log in
-              </router-link>
+          <template v-if="isUserLogin">
+            <span>{{ getLoginUser }}</span>
+            <a href="javascript:;" @click="logoutUser">Logout</a>
+          </template>
+          <template v-else>
+            <div class="navbar-item">
+              <div class="buttons">
+                <router-link to="/signup" class="button is-primary">
+                  <strong>Sign up</strong>
+                </router-link>
+                <router-link to="/login" class="button is-light" id="login-btn">
+                  Log in
+                </router-link>
+              </div>
             </div>
-          </div>
+          </template>
         </div>
       </div>
     </nav>
@@ -69,11 +83,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    isUserLogin() {
+      return this.$store.getters.isLogin;
+    },
+    getLoginUser() {
+      return this.$store.state.username;
+    },
+  },
+  methods: {
+    logoutUser() {
+      this.$store.commit('clearUsername');
+      this.$router.push('/login');
+    },
+  },
+};
 </script>
 
 <style scoped>
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
 
 #login-btn {
   font-weight: bold;

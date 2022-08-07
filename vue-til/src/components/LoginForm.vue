@@ -1,18 +1,61 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="userId">ID : </label>
-      <input id="userId" type="text" v-model="userId" />
+  <div class="wrap">
+    <form @submit.prevent="submitForm" class="box">
+      <div class="field">
+        <label class="label" for="userId">Email</label>
+        <div class="control">
+          <input
+            v-model="userId"
+            id="email"
+            class="input"
+            type="email"
+            placeholder="alex@example.com"
+          />
+        </div>
+      </div>
 
-      <label for="password">Password : </label>
-      <input id="password" type="text" v-model="password" />
-    </div>
-    <button type="submit">Login</button>
-  </form>
+      <div class="field">
+        <label class="label" for="password">Password</label>
+        <div class="control">
+          <input
+            v-model="password"
+            id="password"
+            class="input"
+            type="password"
+            placeholder="********"
+          />
+        </div>
+      </div>
+
+      <div class="btn-wrap">
+        <button
+          :disabled="!isUserEmailValid || !checkPw"
+          class="button is-primary"
+          type="submit"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+
+<!--  <form @submit.prevent="submitForm">-->
+<!--    <div>-->
+<!--      <label for="userId">ID : </label>-->
+<!--      <input id="userId" type="text" v-model="userId" />-->
+
+<!--      <label for="password">Password : </label>-->
+<!--      <input id="password" type="text" v-model="password" />-->
+<!--    </div>-->
+<!--    <button :disabled="!isUserEmailValid || !password" type="submit">-->
+<!--      Login-->
+<!--    </button>-->
+  <!--  </form>-->
 </template>
 
 <script>
 import { loginUser } from '@/api/index.js';
+import { validEmail } from '@/utils/validation.js';
 
 export default {
   data() {
@@ -20,6 +63,18 @@ export default {
       userId: '',
       password: '',
     };
+  },
+  computed: {
+    isUserEmailValid() {
+      return validEmail(this.userId);
+    },
+    checkPw() {
+      if (this.password === '') {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
   methods: {
     async submitForm() {
@@ -29,10 +84,12 @@ export default {
           password: this.password,
         };
         const response = await loginUser(userData);
+        this.$store.commit('setUsername', userData.userId);
         alert(`${userData.userId} 님 로그인 되었습니다.`);
+        this.$router.push('/main');
         console.log(response);
       } catch (e) {
-        console.log(e.response);
+        // console.log(e.response);
         alert(e.response.data.description);
       } finally {
         this.initForm();
@@ -46,4 +103,22 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
+
+.box {
+  width: 500px;
+  height: 370px;
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  margin-left: -250px;
+  margin-top: -150px;
+}
+
+.btn-wrap > button {
+  width: 460px;
+  margin-top: 25px;
+  font-weight: bold;
+}
+</style>

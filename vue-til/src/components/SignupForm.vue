@@ -23,7 +23,13 @@
       </div>
 
       <div class="btn-wrap">
-        <button class="button is-primary" type="submit">Sign in</button>
+        <button
+          :disabled="!isUserEmailValid || !password || !nickname"
+          class="button is-primary"
+          type="submit"
+        >
+          Sign in
+        </button>
       </div>
     </form>
   </div>
@@ -31,6 +37,7 @@
 
 <script>
 import { registerUser } from '@/api/index.js';
+import { validEmail } from '@/utils/validation';
 
 export default {
   data() {
@@ -39,6 +46,11 @@ export default {
       password: '',
       nickname: '',
     };
+  },
+  computed: {
+    isUserEmailValid() {
+      return validEmail(this.email);
+    },
   },
   methods: {
     async submitForm() {
@@ -49,7 +61,7 @@ export default {
           nickname: this.nickname,
         };
         // const response = await registerUser(userData);
-        const { data } = await registerUser(userData);
+        const {data} = await registerUser(userData);
         alert(`${data.nickname} 님이 가입되었습니다.`);
         // this.logMessage = `${data.nickname} 님이 가입되었습니다.`;
         // console.log(response)
