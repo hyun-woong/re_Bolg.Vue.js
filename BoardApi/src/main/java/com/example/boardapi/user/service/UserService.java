@@ -24,6 +24,10 @@ public class UserService {
     //회원가입
     @Transactional
     public ResponseEntity<User> signup(SignupDto signupDto) {
+        User findUser = userRepository.findByEmail(signupDto.getEmail());
+        if (findUser != null) {
+            throw new CustomException(ErrorCode.ALREADY_EMAIL);
+        }
         String pw = passwordEncoder.encode(signupDto.getPassword());
         User user = new User(signupDto, pw);
         userRepository.save(user);
@@ -32,8 +36,11 @@ public class UserService {
 
     public HttpHeaders login(LoginDto loginDto) {
         User user = userRepository.findByEmail(loginDto.getUserId());
+        if (user == null) {
+            throw new CustomException(ErrorCode.BAD_REQUEST);
+        }
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
-            throw new CustomException(ErrorCode.NOT_FOUND_USER_ID);
+            throw new CustomException(ErrorCode.BAD_REQUEST_PASSWORD);
         }
 
         HttpHeaders headers = new HttpHeaders();

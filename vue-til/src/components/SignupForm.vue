@@ -26,12 +26,11 @@
         <button class="button is-primary" type="submit">Sign in</button>
       </div>
     </form>
-
   </div>
 </template>
 
 <script>
-import {registerUser} from "@/api/index.js";
+import { registerUser } from '@/api/index.js';
 
 export default {
   data() {
@@ -39,42 +38,47 @@ export default {
       email: '',
       password: '',
       nickname: '',
-    }
+    };
   },
   methods: {
     async submitForm() {
-      const userData = {
-        email: this.email,
-        password: this.password,
-        nickname: this.nickname,
-      };
-      // const response = await registerUser(userData);
-      const {data} = await registerUser(userData);
-      alert(`${data.nickname} 님이 가입되었습니다.`)
-      // this.logMessage = `${data.nickname} 님이 가입되었습니다.`;
-      // console.log(response)
-      this.initForm();
+      try {
+        const userData = {
+          email: this.email,
+          password: this.password,
+          nickname: this.nickname,
+        };
+        // const response = await registerUser(userData);
+        const { data } = await registerUser(userData);
+        alert(`${data.nickname} 님이 가입되었습니다.`);
+        // this.logMessage = `${data.nickname} 님이 가입되었습니다.`;
+        // console.log(response)
+        this.initForm();
+      } catch (e) {
+        console.log(e.response);
+        alert(e.response.data.description);
+      }
     },
     initForm() {
       this.email = '';
       this.password = '';
       this.nickname = '';
     },
-  }
+  },
 };
 </script>
 
 <style scoped>
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
 
 .box {
-  width:500px;
-  height:370px;
+  width: 500px;
+  height: 370px;
   position: absolute;
-  left:50%;
-  top:46%;
-  margin-left:-250px;
-  margin-top:-150px;
+  left: 50%;
+  top: 46%;
+  margin-left: -250px;
+  margin-top: -150px;
 }
 
 .btn-wrap > button {

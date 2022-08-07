@@ -23,14 +23,19 @@ export default {
   },
   methods: {
     async submitForm() {
-      const userData = {
-        userId: this.userId,
-        password: this.password,
-      };
-      const response = await loginUser(userData);
-      alert(`${userData.userId} 님 로그인 되었습니다.`);
-      console.log(response);
-      this.initForm();
+      try {
+        const userData = {
+          userId: this.userId,
+          password: this.password,
+        };
+        const response = await loginUser(userData);
+        alert(`${userData.userId} 님 로그인 되었습니다.`);
+        console.log(response);
+        this.initForm();
+      } catch (e) {
+        console.log(e.response);
+        alert(e.response.data.description);
+      }
     },
     initForm() {
       this.userId = '';

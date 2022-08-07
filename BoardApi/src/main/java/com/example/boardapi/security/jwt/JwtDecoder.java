@@ -37,39 +37,6 @@ public class JwtDecoder {
                 .asString();
     }
 
-    // refreshToken 유효성 검사
-    public void decodeRefresh(String token) {
-        DecodedJWT decodedJWT = isValidToken(token)
-                .orElseThrow(() -> new CustomException(TRY_SUBSTRING));
-
-        Date expiredDate = decodedJWT
-                .getClaim(CLAIM_EXPIRED_DATE)
-                .asDate();
-
-        Date now = new Date();
-        if (expiredDate.before(now)) {
-            throw new CustomException(BAD_TOKEN);
-        }
-    }
-
-    public String decodeNickName(String token) {
-        DecodedJWT decodedJWT = isValidToken(token)
-                .orElseThrow(() -> new CustomException(BAD_TOKEN));
-
-        Date expiredDate = decodedJWT
-                .getClaim(CLAIM_EXPIRED_DATE)
-                .asDate();
-
-        Date now = new Date();
-        if (expiredDate.before(now)) {
-            throw new CustomException(BAD_TOKEN);
-        }
-
-        return decodedJWT
-                .getClaim(CLAIM_USER_NAME)
-                .asString();
-    }
-
     public Optional<DecodedJWT> isValidToken(String token) {
         DecodedJWT jwt = null;
         log.info("token : {}", token);
