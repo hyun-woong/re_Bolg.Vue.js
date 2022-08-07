@@ -1,5 +1,10 @@
 <template>
-  <LoginForm></LoginForm>
+
+  <div>
+    <h1>Login Page</h1>
+    <LoginForm></LoginForm>
+  </div>
+
 </template>
 
 <script>
@@ -11,4 +16,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+</style>
