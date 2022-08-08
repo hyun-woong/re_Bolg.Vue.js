@@ -1,14 +1,11 @@
 <template>
-
   <div>
-    <h1>Login Page</h1>
     <LoginForm></LoginForm>
   </div>
-
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm";
+import LoginForm from '@/components/LoginForm';
 export default {
   components: {
     LoginForm,
@@ -16,6 +13,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

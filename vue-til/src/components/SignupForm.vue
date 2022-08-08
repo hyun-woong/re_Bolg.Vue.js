@@ -61,7 +61,7 @@ export default {
           nickname: this.nickname,
         };
         // const response = await registerUser(userData);
-        const {data} = await registerUser(userData);
+        const { data } = await registerUser(userData);
         alert(`${data.nickname} 님이 가입되었습니다.`);
         // this.logMessage = `${data.nickname} 님이 가입되었습니다.`;
         // console.log(response)
