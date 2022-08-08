@@ -19,6 +19,7 @@ export default new Vuex.Store({
     },
     clearUsername(state) {
       state.username = '';
+      state.token = '';
     },
     setToken(state, token) {
       state.token = token;
