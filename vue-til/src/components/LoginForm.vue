@@ -71,12 +71,13 @@ export default {
           password: this.password,
         };
         const response = await loginUser(userData);
+        console.log(response.headers['authorization']);
+        this.$store.commit('setToken', response.headers['authorization']);
         this.$store.commit('setUsername', userData.userId);
         alert(`${userData.userId} 님 로그인 되었습니다.`);
         this.$router.push('/main');
         console.log(response);
       } catch (e) {
-        // console.log(e.response);
         alert(e.response.data.description);
       } finally {
         this.initForm();
