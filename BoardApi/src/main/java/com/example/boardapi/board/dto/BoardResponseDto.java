@@ -14,4 +14,8 @@ public class BoardResponseDto {
         this.username = board.getUser().getNickname();
         this.date = board.getCreatedAt();
     }
+
+    public BoardResponseDto(BoardRequestDto dto) {
+        this.title = dto.getTitle();
+    }
 }

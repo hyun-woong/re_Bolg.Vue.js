@@ -48,6 +48,8 @@ public class BoardService {
         }
         User user = userRepository.findByEmail(userDetails.getUsername());
 
+        userRepository.delete(user);
+
         Board board = new Board(requestDto, user);
 
         boardRepository.save(board);
