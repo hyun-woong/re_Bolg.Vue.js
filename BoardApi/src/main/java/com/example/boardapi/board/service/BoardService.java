@@ -11,8 +11,10 @@ import com.example.boardapi.util.exception.CustomException;
 import com.example.boardapi.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
     public ResponseEntity<Object> getBoardList(UserDetailsImpl userDetails) {
         if (userDetails == null) {
             throw new CustomException(ErrorCode.NOT_FOUND_USER_ID);
@@ -57,5 +60,26 @@ public class BoardService {
         return ResponseEntity
                 .ok()
                 .body("게시글 작성 완료!");
+    }
+
+    //dummy data
+    @Transactional
+    @PostConstruct
+    public void postContent() {
+        String pw = encoder.encode("1q2w3e!");
+
+        User user = new User("sparta1@gmail.com", pw, "nickName");
+        userRepository.save(user);
+
+        List<Board> boardList = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            String title = "제목" + i;
+            String content = "내용" + i;
+            Board board = new Board(title, content, user);
+            boardList.add(board);
+        }
+
+        boardRepository.saveAll(boardList);
     }
 }

@@ -24,7 +24,7 @@ function loginUser(userData) {
 
 // 학습 노트 데이터를 조회하는 API
 function fetchPosts() {
-  return instance.get('/posts');
+  return instance.get('/board');
 }
 
 export { registerUser, loginUser, fetchPosts };

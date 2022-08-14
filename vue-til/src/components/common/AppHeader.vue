@@ -30,7 +30,7 @@
             Home
           </router-link>
 
-          <router-link to="/board" class="navbar-item">
+          <router-link to="/main" class="navbar-item">
             Board
           </router-link>
 

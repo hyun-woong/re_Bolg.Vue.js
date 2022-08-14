@@ -29,4 +29,10 @@ public class User extends Timestamped {
         this.password = pw;
         this.nickname = dto.getNickname();
     }
+
+    public User(String email, String pw, String nickname) {
+        this.email = email;
+        this.password = pw;
+        this.nickname = nickname;
+    }
 }
