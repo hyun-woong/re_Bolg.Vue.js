@@ -1,9 +1,7 @@
 <template>
   <div>
     <h1>Today I Learned</h1>
-    <div v-if="isLoading">
-      Loading...
-    </div>
+    <LoadingSpinner v-if="isLoading"></LoadingSpinner>
     <div v-else>
       <MainContentListForm
         v-for="item in postItems"
@@ -17,8 +15,12 @@
 <script>
 import { fetchPosts } from '@/api/index.js';
 import MainContentListForm from '@/components/MainContentListForm.vue';
+import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 export default {
-  components: { MainContentListForm },
+  components: {
+    MainContentListForm,
+    LoadingSpinner,
+  },
   data() {
     return {
       postItems: [],
