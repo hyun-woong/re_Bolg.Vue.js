@@ -31,4 +31,10 @@ public class Board extends Timestamped {
         this.content = requestDto.getContent();
         this.user = user;
     }
+
+    public Board(String title, String content, User user) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+    }
 }
