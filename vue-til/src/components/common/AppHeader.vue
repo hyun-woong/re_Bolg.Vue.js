@@ -42,7 +42,9 @@
 
             <div class="navbar-dropdown">
               <a class="navbar-item">
-                About
+                <router-link to="/post">
+                  Add
+                </router-link>
               </a>
               <a class="navbar-item">
                 Jobs
@@ -107,4 +109,5 @@ export default {
 #login-btn {
   font-weight: bold;
 }
+
 </style>
