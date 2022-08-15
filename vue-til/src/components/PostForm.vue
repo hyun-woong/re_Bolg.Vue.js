@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { createPost } from '@/api/board.js';
+import { createPost } from '@/api/Board.js';
 
 export default {
   data() {
@@ -32,11 +32,14 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const response = await createPost({
+        const postDate = {
           title: this.title,
           content: this.content,
-        });
+        };
+        console.log(postDate);
+        const response = await createPost(postDate);
         console.log(response);
+        await this.$router.push('/main');
       } catch (e) {
         console.log(e);
       }

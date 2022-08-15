@@ -51,8 +51,6 @@ public class BoardService {
         }
         User user = userRepository.findByEmail(userDetails.getUsername());
 
-        userRepository.delete(user);
-
         Board board = new Board(requestDto, user);
 
         boardRepository.save(board);
@@ -82,4 +80,16 @@ public class BoardService {
 
         boardRepository.saveAll(boardList);
     }
+
+    @Transactional
+    public ResponseEntity<?> deletePost(UserDetailsImpl userDetails, Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(
+                () -> new NullPointerException("게시글이 존재하지 않습니다.")
+        );
+
+        boardRepository.delete(board);
+
+        return ResponseEntity.ok().body("삭제 완료");
+    }
+
 }

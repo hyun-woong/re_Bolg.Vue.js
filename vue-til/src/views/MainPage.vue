@@ -7,13 +7,14 @@
         v-for="item in postItems"
         :key="item.boardId"
         :item="item"
+        @refresh="fetchData"
       ></MainContentListForm>
     </div>
   </div>
 </template>
 
 <script>
-import { fetchPosts } from '@/api/board.js';
+import { fetchPosts } from '@/api/Board.js';
 import MainContentListForm from '@/components/MainContentListForm.vue';
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 export default {

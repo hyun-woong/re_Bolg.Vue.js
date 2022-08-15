@@ -28,18 +28,28 @@
       </nav>
     </div>
     <div class="media-right">
-      <button class="delete"></button>
+      <button class="delete" @click="deletePost"></button>
     </div>
   </article>
 </template>
 
 <script>
+import { deletePost } from '@/api/Board.js';
 export default {
   props: {
     // 값이 넘어오는지 체크해줌(벨리 데이트)
     item: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    async deletePost() {
+      if (confirm('You want to delete it?')) {
+        await deletePost(this.item.boardId);
+        this.$emit('refresh');
+        alert('삭제 완료');
+      }
     },
   },
 };

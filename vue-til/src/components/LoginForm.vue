@@ -70,7 +70,7 @@ export default {
           password: this.password,
         };
         await this.$store.dispatch('LOGIN', userData);
-        this.$router.push('/main');
+        await this.$router.push('/main');
       } catch (e) {
         console.log(e.response.data.description);
         alert(e.response.data.description);
