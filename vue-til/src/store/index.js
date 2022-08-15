@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { getUserFromCookie, getAuthFromCookie, saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
-import { loginUser } from '@/api/index.js';
+import { loginUser } from '@/api/auth.js';
 
 Vue.use(Vuex);
 

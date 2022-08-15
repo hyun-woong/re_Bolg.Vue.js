@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { createPost } from '@/api/index.js';
+import { createPost } from '@/api/board.js';
 
 export default {
   data() {

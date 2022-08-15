@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { fetchPosts } from '@/api/index.js';
+import { fetchPosts } from '@/api/board.js';
 import MainContentListForm from '@/components/MainContentListForm.vue';
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 export default {
