@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item">
+        <router-link :to="loginLink" class="navbar-item">
           <img
             src="https://bulma.io/images/bulma-logo.png"
             width="112"
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { deleteCookie } from '@/utils/cookies.js';
 export default {
   computed: {
     isUserLogin() {
@@ -93,10 +94,16 @@ export default {
     getLoginUser() {
       return this.$store.state.username;
     },
+    loginLink() {
+      return this.$store.getters.isLogin ? '/main' : '/login';
+    },
   },
   methods: {
     logoutUser() {
       this.$store.commit('clearUsername');
+      this.$store.commit('clearToken');
+      deleteCookie('til_auth');
+      deleteCookie('til_user');
       this.$router.push('/login');
     },
   },
@@ -109,5 +116,4 @@ export default {
 #login-btn {
   font-weight: bold;
 }
-
 </style>

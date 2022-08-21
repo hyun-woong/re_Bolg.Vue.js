@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,4 +93,30 @@ public class BoardService {
         return ResponseEntity.ok().body("삭제 완료");
     }
 
+    public ResponseEntity<?> getBoard(UserDetailsImpl userDetails, Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(
+                () -> new EntityNotFoundException("게시물이 존재하지 않습니다.")
+        );
+
+        BoardResponseDto responseDto = new BoardResponseDto(board, userDetails);
+
+        return ResponseEntity
+                .ok()
+                .body(responseDto);
+    }
+
+    @Transactional
+    public ResponseEntity<?> updatePost(UserDetailsImpl userDetails, Long boardId, BoardRequestDto requestDto) {
+
+        Board board = boardRepository.findById(boardId).orElseThrow(
+                () -> new EntityNotFoundException("없음")
+        );
+
+        board.update(requestDto);
+
+        boardRepository.save(board);
+        return ResponseEntity
+                .ok()
+                .body("성공");
+    }
 }
