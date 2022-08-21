@@ -1,14 +1,18 @@
 package com.example.boardapi.board.dto;
 
 import com.example.boardapi.board.entity.Board;
+import com.example.boardapi.security.UserDetailsImpl;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class BoardResponseDto {
     private String title;
     private String username;
-    private String date;
+    private LocalDateTime date;
     private Long boardId;
+    private String content;
 
     public BoardResponseDto(Board board) {
         this.title = board.getTitle();
@@ -17,7 +21,11 @@ public class BoardResponseDto {
         this.boardId = board.getBoardId();
     }
 
-    public BoardResponseDto(BoardRequestDto dto) {
-        this.title = dto.getTitle();
+    public BoardResponseDto(Board board, UserDetailsImpl userDetails) {
+        this.title = board.getTitle();
+        this.username = userDetails.getUsername();
+        this.date = board.getCreatedAt();
+        this.boardId = board.getBoardId();
+        this.content = board.getContent();
     }
 }

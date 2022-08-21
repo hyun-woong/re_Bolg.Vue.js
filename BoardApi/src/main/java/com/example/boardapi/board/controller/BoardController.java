@@ -21,6 +21,12 @@ public class BoardController {
         return boardService.getBoardList(userDetails);
     }
 
+    @GetMapping("/{boardId}")
+    public ResponseEntity<?> getBoard(@AuthenticationPrincipal UserDetailsImpl userDetails,
+                                      @PathVariable(value = "boardId") Long boardId) {
+        return boardService.getBoard(userDetails, boardId);
+    }
+
     @PostMapping
     public ResponseEntity<Object> createPost(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                              @RequestBody BoardRequestDto requestDto) {
@@ -30,7 +36,14 @@ public class BoardController {
     @DeleteMapping("/{boardId}")
     public ResponseEntity<?> deletePost(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                         @PathVariable Long boardId) {
+
         return boardService.deletePost(userDetails, boardId);
     }
 
+    @PutMapping("/{boardId}")
+    public ResponseEntity<?> updatePost(@AuthenticationPrincipal UserDetailsImpl userDetails,
+                                        @PathVariable Long boardId,
+                                        @RequestBody BoardRequestDto requestDto) {
+        return boardService.updatePost(userDetails, boardId, requestDto);
+    }
 }

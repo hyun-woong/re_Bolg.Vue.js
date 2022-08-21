@@ -11,9 +11,17 @@ function createPost(postData) {
   return board.post('', postData);
 }
 
+function fetchPost(postId) {
+  return board.get(postId);
+}
+
 // 학습 노트 삭제 API
 function deletePost(postId) {
   return board.delete(`/${postId}`);
 }
 
-export { fetchPosts, createPost, deletePost };
+function editPost(postId, postData) {
+  return board.put(postId, postData);
+}
+
+export { fetchPosts, createPost, deletePost, fetchPost, editPost };

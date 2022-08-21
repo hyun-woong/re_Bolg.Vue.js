@@ -8,7 +8,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>{{ item.title }}</strong> <small>{{ item.username }}</small> <small>{{ item.date }}</small>
+          <strong>{{ item.title }}</strong> <small>{{ item.username }}</small> <small>{{ item.date | formatDate }}</small>
           <br>
           {{ item.title }} {{ item.username }}
         </p>
@@ -29,12 +29,14 @@
     </div>
     <div class="media-right">
       <button class="delete" @click="deletePost"></button>
+      <button class="update" @click="editItem">UPDATE</button>
     </div>
   </article>
 </template>
 
 <script>
 import { deletePost } from '@/api/Board.js';
+
 export default {
   props: {
     // 값이 넘어오는지 체크해줌(벨리 데이트)
@@ -43,6 +45,11 @@ export default {
       required: true,
     },
   },
+  filters: {
+    // formateDate(value) {
+    //   return new Date(value);
+    // },
+  },
   methods: {
     async deletePost() {
       if (confirm('You want to delete it?')) {
@@ -50,6 +57,11 @@ export default {
         this.$emit('refresh');
         alert('삭제 완료');
       }
+    },
+    async editItem() {
+      console.log('합격');
+      const id = this.item.boardId;
+      await this.$router.push(`/post/${id}`);
     },
   },
 };

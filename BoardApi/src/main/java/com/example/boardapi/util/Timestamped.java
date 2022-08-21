@@ -18,19 +18,22 @@ import java.time.format.DateTimeFormatter;
 public abstract class Timestamped {
 
     @CreatedDate
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private String modifiedAt;
+    private LocalDateTime modifiedAt;
 
     @PrePersist
     public void onPrePersist() {
-        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.modifiedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//        this.modifiedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.createdAt = LocalDateTime.now();
+        this.modifiedAt = LocalDateTime.now();
     }
 
-    @PreUpdate
-    public void onPreUpdate() {
-        this.modifiedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        @PreUpdate
+        public void onPreUpdate () {
+//        this.modifiedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            this.modifiedAt = LocalDateTime.now();
+        }
     }
-}
